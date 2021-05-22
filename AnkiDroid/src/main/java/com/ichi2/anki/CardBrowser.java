@@ -1746,9 +1746,15 @@ public class CardBrowser extends NavigationDrawerActivity implements
         s = s.replace("<br />", " ");
         s = s.replace("<div>", " ");
         s = s.replace("\n", " ");
-        s = showFileNames ? Utils.stripSoundMedia(s) : Utils.stripSoundMedia(s, " ");
         s = s.replaceAll("\\[\\[type:[^]]+]]", "");
-        s = showFileNames ? Utils.stripHTMLMedia(s) : Utils.stripHTMLMedia(s, " ");
+        if(showFileNames){
+            s=Utils.stripHTMLMedia(s);
+            s=Utils.stripSoundMedia(s);
+        }else{
+            s=Utils.stripHTMLMedia(s, "file"+cnt);
+            s=Utils.stripSoundMedia(s, "file"+cnt);
+            cnt++;
+        }
         s = s.trim();
         return s;
     }
